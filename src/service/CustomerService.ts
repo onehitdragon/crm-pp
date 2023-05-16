@@ -5,17 +5,23 @@ class CustomerService{
     public static async save<TCustomerCreation extends CustomerCreationDTO>(customerCreation: TCustomerCreation): Promise<CustomerDTO>{
         const createdCustomer = await Customer.create(customerCreation);
 
-        return createdCustomer.get();
+        return createdCustomer;
     }
 
     public static async find(id: string): Promise<CustomerDTO | null>{
-        const customer = Customer.findOne({
+        const customer = await Customer.findOne({
             where: {
                 id: id
             }
         });
 
         return customer;
+    }
+
+    public static async findAll(): Promise<CustomerDTO[] | null>{
+        const customers = await Customer.findAll();
+
+        return customers;
     }
 
     public static async update(id: string, customer: CustomerUpdationDTO): Promise<number>{

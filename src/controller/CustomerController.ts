@@ -57,6 +57,27 @@ class CustomerController{
         });
     }
 
+    public static async getAll(req: Request, res: Response<StandardResponseBody>){
+        let customers: CustomerDTO[] | null;
+        try{
+            customers = await CustomerService.findAll();
+        }
+        catch(err){
+            return res.status(500).json({
+                status: "system error",
+                msg: "get all fail"
+            });
+        }
+
+        return res.json({
+            status: "success",
+            msg: "get all ok",
+            content: {
+                customers: customers
+            }
+        });
+    }
+
     public static async get(req: Request<{id: string}>, res: Response<StandardResponseBody>){
         const validate = (z.string().uuid()).safeParse(req.params.id);
         if(!validate.success){
