@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { CustomerCreationDTO, CustomerDTO, CustomerUpdationDTO } from "../dto";
 import Customer from "../model/Customer";
 
@@ -18,8 +19,32 @@ class CustomerService{
         return customer;
     }
 
-    public static async findAll(): Promise<CustomerDTO[] | null>{
-        const customers = await Customer.findAll();
+    public static async findAll<TFilter extends CustomerCreationDTO>(filter?: TFilter): Promise<CustomerDTO[] | null>{
+        const customers = await Customer.findAll({
+            where: {
+                ...filter,
+                name: filter?.name ? {
+                    [Op.like]:  "%" + filter.name + "%"
+                } : {
+                    [Op.like]: "%%"
+                },
+                address: filter?.address ? {
+                    [Op.like]:  "%" + filter.address + "%"
+                } : {
+                    [Op.like]: "%%"
+                },
+                phone: filter?.phone ? {
+                    [Op.like]:  "%" + filter.phone + "%"
+                } : {
+                    [Op.like]: "%%"
+                },
+                email: filter?.email ? {
+                    [Op.like]:  "%" + filter.email + "%"
+                } : {
+                    [Op.like]: "%%"
+                }
+            }
+        });
 
         return customers;
     }

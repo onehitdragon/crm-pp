@@ -60,12 +60,13 @@ class CustomerController{
     public static async getAll(req: Request, res: Response<StandardResponseBody>){
         let customers: CustomerDTO[] | null;
         try{
-            customers = await CustomerService.findAll();
+            customers = await CustomerService.findAll<any>(req.query);
         }
         catch(err){
             return res.status(500).json({
                 status: "system error",
-                msg: "get all fail"
+                msg: "get all fail",
+                content: err
             });
         }
 
