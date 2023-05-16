@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import Customer from "../model/Customer";
 import Product from "../model/Product";
 import db from "../db/db";
+import Transaction from "../model/Transaction";
+import Contact from "../model/Contact";
 
 class DatabaseController{
     public static async recreate(req: Request, res: Response<StandardResponseBody>){
-        console.log(Customer, Product);
+        console.log(Customer, Product, Transaction, Contact);
         try{
             await db.sync({
                 force: true

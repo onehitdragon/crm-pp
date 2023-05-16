@@ -22,7 +22,8 @@ Product.init({
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
 }, {
-    sequelize: db
+    sequelize: db,
+    tableName: "Products"
 });
 
 export default Product;

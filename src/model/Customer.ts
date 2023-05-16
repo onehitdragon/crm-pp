@@ -24,7 +24,8 @@ Customer.init({
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
 }, {
-    sequelize: db
+    sequelize: db,
+    tableName: "Customers"
 });
 
 export default Customer;
