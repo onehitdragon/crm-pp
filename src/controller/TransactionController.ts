@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import z from "zod";
 import { TransactionDTO } from "../dto";
 import TransactionService from "../service/TransactionService";
-import { UniqueConstraintError } from "sequelize";
 
 const transactionCreationSchema = z.object({
     customerId: z.string().uuid(),
