@@ -31,14 +31,20 @@ Transaction.init({
 });
 
 Customer.belongsToMany(Product, {
-    through: Transaction,
+    through: {
+        model: Transaction,
+        unique: false
+    },
     foreignKey: {
         name: "customerId"
     }
 });
 
 Product.belongsToMany(Customer, {
-    through: Transaction,
+    through: {
+        model: Transaction,
+        unique: false
+    },
     foreignKey: {
         name: "productId"
     }
