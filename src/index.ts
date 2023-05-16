@@ -1,5 +1,8 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv"
+dotenv.config();
+import databaseRoute from "./routes/databaseRoute";
 
 const app = express();
 app.listen(12345, () => {
@@ -11,8 +14,4 @@ app.use(cors());
 app.use(express.json());
 
 // route
-app.get("/", (req, res) => {
-    return res.json({
-        name: "vinh"
-    });
-})
+app.use("/api/v1/db", databaseRoute);
