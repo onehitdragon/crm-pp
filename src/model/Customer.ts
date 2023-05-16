@@ -19,8 +19,14 @@ Customer.init({
     },
     name: DataTypes.STRING,
     address: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    email: DataTypes.STRING,
+    phone: {
+        type: DataTypes.STRING,
+        unique: true
+    },
+    email: {
+        type: DataTypes.STRING,
+        unique: true
+    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
 }, {
